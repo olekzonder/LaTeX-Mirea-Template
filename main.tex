@@ -1,0 +1,31 @@
+\documentclass{article}
+
+% настройки для титульного листа
+\newcommand{\prepodname}{} %имя препода%
+\newcommand{\discname}{} %дисциплина%
+\newcommand{\themename}{} %тема работы%
+\newcommand{\coursenum}{} %номер курса
+\newcommand{\groupname}{} %группа%
+\newcommand{\speciality}{}
+\newcommand{\fio}{} %ФИО%
+
+\input{gost.tex}
+
+
+\begin{document}
+
+% титульник
+
+\input{title.tex} 
+%\includepdf{title.pdf} % раскомментить, если титульник дан в формате pdf
+
+%содержание
+\input{toc.tex}
+
+% текст работы
+\input{content.tex}
+
+% список литературы
+\input{bibliography.tex}
+
+\end{document}
