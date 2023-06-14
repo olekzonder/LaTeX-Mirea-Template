@@ -60,3 +60,8 @@ tlmgr install `cat latex_requirements.txt`
 - Более удобное оформление таблиц
 
 - Вставка кода с файла, оформление листингов по ГОСТу с автоматической нумерацией
+
+
+## Пример
+
+Пример формата отчёта можно посмотреть [здесь](https://github.com/olekzonder/LaTeX-Mirea-Template/blob/example/main.pdf)
