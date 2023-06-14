@@ -12,54 +12,45 @@
 \usepackage{amsmath}
 \usepackage{sectsty}
 \usepackage{pdfpages}
+\usepackage{titlesec}
 \setmainfont{Times New Roman}
 \usepackage[fontsize=14pt]{fontsize}
 \setlength{\parskip}{0pt}
 
-\sectionfont{\fontsize{14}{14}\selectfont}
-\subsectionfont{\fontsize{14}{14}\selectfont}
 \linespread{1.5}
 \setlength{\parindent}{1.25cm}
-
- 
 \hypersetup{ 
      colorlinks=true, 
      linkcolor=black, 
      filecolor=blue, 
      citecolor = black,       
      urlcolor=blue, 
-     }
+}
 
 \BeforeBeginEnvironment{verbatim}{\def\baselinestretch{1}}
 \setmonofont[Scale=0.85]{Courier New}
-\setlength{\cftsecindent}{0pt}
-\setlength{\cftsubsecindent}{0pt}
-
 \usepackage[a4paper, left=30mm,top=20mm,bottom=20mm,right=10mm]{geometry}
-
-\newcommand{\intro}{%
-  \section*{Введение}
-  \addcontentsline{toc}{section}{Введение}
-}
-
-\newcommand{\conclusion}{%
-  \section*{Заключение}
-  \addcontentsline{toc}{section}{Заключение}
-}
-
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{0pt}
+\renewcommand{\cfttoctitlefont}{\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\setlength{\cftbeforesecskip}{0em}
+\setlength{\cftbeforesubsecskip}{0em}
+\setlength{\cftbeforesubsubsecskip}{0em}
 \renewcommand{\cftbeforetoctitleskip}{0cm}
+\cftsetindents{chapter}{0em}{2em}
 \cftsetindents{section}{0em}{2em}
 \cftsetindents{subsection}{0em}{2em}
-\renewcommand{\cfttoctitlefont}{\normalfont\bfseries}
-\renewcommand{\cftaftertoctitleskip}{0.0\baselineskip}
+\cftsetindents{subsubsection}{0em}{2em}
+\setlength{\cfttabnumwidth}{2em}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftdot}{.}
-\newcounter{imgcount}
 
 \usepackage{caption}
 \DeclareCaptionLabelFormat{mylabel}{Рисунок #2}
-\captionsetup{labelformat=mylabel}
+\captionsetup{labelformat=mylabel,labelsep=endash}
 
 \newcommand{\image}[2]{%
   \begin{figure}[htbp]
@@ -69,5 +60,22 @@
     \label{fig:#1}
   \end{figure}
 }
+\graphicspath{{./media/}}
 
-\graphicspath{ {./media/}
+\titleformat{\chapter}[block]{\normalfont\fontsize{14}{14}\selectfont\bfseries}{\hspace{1.25cm}\thechapter}{1em}{}
+\titleformat{name=\chapter,numberless}{\normalfont\fontsize{14}{14}\selectfont\bfseries}{\hspace{1.25cm}}{0pt}{}
+\titleformat{\section}{\normalfont\fontsize{14}{14}\bfseries}{\hspace{1.25cm}\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{14}{14}\bfseries}{\hspace{1.25cm}\thesubsection}{1em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{1em}
+\titlespacing*{\section}{0pt}{0pt}{1em}
+\titlespacing*{\subsection}{0pt}{0pt}{1em}
+
+\newcommand{\intro}{%
+  \chapter*{Введение}
+  \addcontentsline{toc}{chapter}{Введение}
+}
+
+\newcommand{\conclusion}{%
+  \chapter*{Заключение}
+  \addcontentsline{toc}{chapter}{Заключение}
+}
