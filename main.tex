@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 
 % настройки для титульного листа
 \newcommand{\prepodname}{} %имя препода%
@@ -11,13 +11,12 @@
 
 \input{gost.tex}
 
-
+\titlespacing*{\chapter}{0pt}{-1.1em}{1em}
 \begin{document}
-
 % титульник
 
-\input{title.tex} 
-%\includepdf{title.pdf} % раскомментить, если титульник дан в формате pdf
+%\input{title.tex} 
+\includepdf{title.pdf} % раскомментить, если титульник дан в формате pdf
 
 %содержание
 \input{toc.tex}
