@@ -1,4 +1,3 @@
-\usepackage[T1]{fontenc}
 \usepackage{fontspec}
 \usepackage{graphicx}
 \usepackage{indentfirst}
@@ -13,10 +12,14 @@
 \usepackage{sectsty}
 \usepackage{pdfpages}
 \usepackage{titlesec}
+\usepackage{enumitem}
 \setmainfont{Times New Roman}
 \usepackage[fontsize=14pt]{fontsize}
-\setlength{\parskip}{0pt}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\setmathfont{STIX Math}
 
+\setlength{\parskip}{0pt}
 \linespread{1.5}
 \setlength{\parindent}{1.25cm}
 \hypersetup{ 
@@ -29,9 +32,9 @@
 
 \BeforeBeginEnvironment{verbatim}{\def\baselinestretch{1}}
 \setmonofont[Scale=0.85]{Courier New}
-\usepackage[a4paper, left=30mm,top=20mm,bottom=20mm,right=10mm]{geometry}
+\usepackage[a4paper, left=30mm,top=20mm,bottom=20mm,right=15mm]{geometry}
 \setlength{\cftbeforetoctitleskip}{0pt}
-\setlength{\cftaftertoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{1.5em}
 \renewcommand{\cfttoctitlefont}{\bfseries}
 \renewcommand{\cftaftertoctitle}{\hfill}
 \setlength{\cftbeforesecskip}{0em}
@@ -48,27 +51,67 @@
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftdot}{.}
-
+\newcommand{\aspace}{\usebox{\spacebox}}%
 \usepackage{caption}
+
 \DeclareCaptionLabelFormat{mylabel}{Рисунок #2}
 \captionsetup{labelformat=mylabel,labelsep=endash}
-
+\captionsetup{belowskip=0pt}
+\captionsetup{aboveskip=0pt}
 \newcommand{\image}[2]{%
   \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth,keepaspectratio]{#1}
+    \includegraphics[width=\textwidth-24pt,keepaspectratio]{#1}
     \caption{#2}
     \label{fig:#1}
   \end{figure}
 }
-\graphicspath{{./media/}}
 
-\titleformat{\chapter}[block]{\normalfont\fontsize{14}{14}\selectfont\bfseries}{\hspace{1.25cm}\thechapter}{1em}{}
-\titleformat{name=\chapter,numberless}{\normalfont\fontsize{14}{14}\selectfont\bfseries}{\hspace{1.25cm}}{0pt}{}
-\titleformat{\section}{\normalfont\fontsize{14}{14}\bfseries}{\hspace{1.25cm}\thesection}{1em}{}
+\newcommand{\medimage}[2]{%
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth-96pt,keepaspectratio]{#1}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+}
+
+\newcommand{\smallerimage}[2]{%
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth-139pt,keepaspectratio]{#1}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+}
+
+\newcommand{\smallimage}[2]{%
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth-169pt,keepaspectratio]{#1}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+}
+
+\newcommand{\tinyimage}[2]{%
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth-248pt,keepaspectratio]{#1}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+}
+\graphicspath{{./img}}
+\titleformat{\chapter}[block]{\normalfont\fontsize{14}{14}\bfseries\centering}{\thechapter.}{4pt}{\MakeUppercase}{\fontsize{14}{14}\selectfont}
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+\titleformat{\section}{\normalfont\centering\bfseries}{\thesection}{1em}{}
+\chapterfont{\centering}
+\titleformat{name=\chapter,numberless}{\normalfont\fontsize{14}{14}\selectfont\bfseries\centering}{}{0pt}{\MakeUppercase}
+\titleformat{\section}{\normalfont\fontsize{14}{14}\bfseries}{\hspace{1.25cm}\thesection}{4pt}{}
 \titleformat{\subsection}{\normalfont\fontsize{14}{14}\bfseries}{\hspace{1.25cm}\thesubsection}{1em}{}
 \titlespacing*{\chapter}{0pt}{0pt}{1em}
-\titlespacing*{\section}{0pt}{1em}{1em}
+\titlespacing*{\section}{0pt}{1em}{0em}
 \titlespacing*{\subsection}{0pt}{1em}{1em}
 
 \newcommand{\intro}{%
@@ -80,3 +123,41 @@
   \chapter*{Заключение}
   \addcontentsline{toc}{chapter}{Заключение}
 }
+
+\newcommand{\blankLine}[2]{
+  \underline{#2} % заполненный текст
+  \par % начало нового абзаца
+  \fontsize{12}{12}\selectfont{#1} % текст для заполнения
+  \par
+  \fontsize{14}{14}\selectfont
+}
+
+\setlength{\jot}{0pt}
+
+\AtBeginEnvironment{itemize}
+  {%
+    \def\itemizepunctuation{\def\itemizepunctuation{\ifhmode\unskip\fi;}}%
+    \pretocmd\item{\itemizepunctuation}{}{}%
+    \pretocmd\enditemize{\ifhmode\unskip\fi.}{}{}%
+  }
+
+  \AtBeginEnvironment{enumerate}
+  {%
+    \def\itemizepunctuation{\def\itemizepunctuation{\ifhmode\unskip\fi;}}%
+    \pretocmd\item{\itemizepunctuation}{}{}%
+    \pretocmd\endenumerate{\ifhmode\unskip\fi.}{}{}%
+  }
+
+\newenvironment{punctitemize}
+  {%
+    \itemize
+    \def\itemizepunctuation{\def\itemizepunctuation{\ifhmode\unskip\fi;}}%
+    \pretocmd\item{\itemizepunctuation}{}{}%
+    \pretocmd\enditemize{\ifhmode\unskip\fi.}{}{}%
+  }
+  {%
+    \enditemize
+  }
+
+\setlist[enumerate]{labelindent=1.25cm,noitemsep, wide,  labelwidth=!, align=left, leftmargin=*, topsep=0pt}
+\setlist[itemize]{labelindent=1.25cm,noitemsep, wide,  labelwidth=!, align=left, leftmargin=*, topsep=0pt}
